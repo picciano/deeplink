@@ -10,16 +10,29 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
+    @IBOutlet weak var schemeField: UITextField!
+    @IBOutlet weak var hostField: UITextField!
+    @IBOutlet weak var pathField: UITextField!
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func openAction(_ sender: Any) {
+        var urlString = String()
+        
+        if let scheme = schemeField.text {
+            urlString.append("\(scheme):")
+        }
+        
+        if let host = hostField.text {
+            urlString.append("//\(host)")
+        }
+        
+        if let path = pathField.text {
+            urlString.append("/\(path)")
+        }
+        
+        if let url = URL(string: urlString) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
-
 
 }
 
